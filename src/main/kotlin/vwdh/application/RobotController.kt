@@ -7,12 +7,12 @@ class RobotController(private val workspace: Workspace) {
 
     fun deployRobots(robots: List<Robot>, instructions: List<String>) {
         if (robots.size != instructions.size) {
-            throw IllegalArgumentException("Cada robot debe tener su serie de instrucciones")
+            throw IllegalArgumentException("Each individual robot should have their separate set of instructions")
         }
 
         robots.forEachIndexed { index, robot ->
             workspace.addRobot(robot)
-            robot.executeInstructions(instructions[index])
+            robot.executeInstructions(instructions[index], workspace.maxX, workspace.maxY)
         }
     }
 

@@ -6,10 +6,18 @@ data class Position(
     val orientation: Orientation
 ) {
 
-    fun move(): Position = when (orientation) {
-        Orientation.N -> copy(y = y + 1)
-        Orientation.E -> copy(x = x + 1)
-        Orientation.S -> copy(y = y - 1)
-        Orientation.W -> copy(x = x - 1)
+    fun move(maxX: Int, maxY: Int): Position {
+        val (newX, newY) = when (orientation) {
+            Orientation.N -> x to y + 1
+            Orientation.E -> x + 1 to y
+            Orientation.S -> x to y - 1
+            Orientation.W -> x - 1 to y
+        }
+
+        if (newX !in 0..maxX || newY !in 0..maxY) {
+            throw IllegalStateException("Cannot move outside workspace boundaries")
+        }
+
+        return copy(x = newX, y = newY)
     }
 }

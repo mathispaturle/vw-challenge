@@ -9,13 +9,13 @@ class Robot(
     var position: Position = initialPosition
         private set
 
-    fun executeInstructions(instructions: String) {
+    fun executeInstructions(instructions: String, maxX: Int, maxY: Int) {
         instructions.forEach { command ->
             val newPosition = when (command) {
                 'L' -> position.copy(orientation = position.orientation.left())
                 'R' -> position.copy(orientation = position.orientation.right())
-                'M' -> position.move()
-                else -> throw IllegalArgumentException("Comando desconocido: $command")
+                'M' -> position.move(maxX, maxY)
+                else -> throw IllegalArgumentException("Unknown command: $command")
             }
             position = newPosition
         }
