@@ -3,7 +3,7 @@ package org.example.vwdh.infrastructure.cli
 class CLIOutputAdapter {
 
     fun printFinalPositions(finalPositions: List<String>) {
-        println("Posiciones finales de los robots:")
+        println("Final robot positions:")
         finalPositions.forEach { println(it) }
     }
 }
